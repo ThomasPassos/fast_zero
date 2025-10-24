@@ -2,13 +2,16 @@
 name = "fast-zero"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Thomas Passos",email = "tm123br@live.com"}
-]
+authors = [{ name = "Thomas Passos", email = "tm123br@live.com" }]
 readme = "README.md"
 requires-python = ">=3.13, <4.0"
 dependencies = [
-    "fastapi[standard] (>=0.115.12,<0.116.0)"
+    "fastapi[standard] (>=0.115.12,<0.116.0)",
+    "sqlalchemy (>=2.0.44,<3.0.0)",
+    "pydantic-settings (>=2.11.0,<3.0.0)",
+    "alembic (>=1.17.0,<2.0.0)",
+    "pwdlib[argon2] (>=0.2.1,<0.3.0)",
+    "pyjwt (>=2.10.1,<3.0.0)",
 ]
 
 
@@ -28,7 +31,7 @@ extend-exclude = ['migrations']
 
 [tool.ruff.lint]
 preview = true
-select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+select = ['I', 'F', 'E', 'W', 'PL', 'PT', "FAST"]
 
 [tool.ruff.format]
 preview = true
@@ -45,3 +48,7 @@ run = 'fastapi dev fast_zero/app.py'
 pre_test = 'task lint'
 test = 'pytest -s -x --cov=fast_zero -vv'
 post_test = 'coverage html'
+
+[tool.pyright]
+exclude = ["migrations"]
+typeCheckingMode = "basic"
