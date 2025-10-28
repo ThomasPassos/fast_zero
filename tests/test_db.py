@@ -1,17 +1,21 @@
 from dataclasses import asdict
 
+import pytest
 from sqlalchemy import select
 
 from fast_zero.models import User
 
 
-def test_create_user(session, mock_db_time):
+@pytest.mark.asyncio
+async def test_create_user(session, mock_db_time):
     user = User(username="test", email="test@test.com", password="secret")
 
     with mock_db_time(model=User) as time:
         session.add(user)
-        session.commit()
-        user = session.scalar(select(User).where(User.username == "test"))
+        await session.commit()
+        user = await session.scalar(
+            select(User).where(User.username == "test")
+        )
 
     assert asdict(user) == {
         "id": 1,
