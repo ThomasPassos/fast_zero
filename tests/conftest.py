@@ -7,7 +7,6 @@ import pytest_asyncio
 from fastapi.testclient import TestClient
 from sqlalchemy import event
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.pool import StaticPool
 from testcontainers.postgres import PostgresContainer
 
 from fast_zero.app import app
